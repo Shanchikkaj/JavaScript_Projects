@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/79ddb11d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+      <div class="music-player">
+         <nav>
+             <div class="circle" onclick="prevSong()">
+                <i class="fa-solid fa-angle-left"></i>
+             </div>
+             <div class="bars" id="playlist-toggle">
+                <i class="fa-solid fa-bars"></i>
+             </div>
+        </nav>
+
+        <img src="size_m.jpg" class="song-img" id="song-img">
+        <h1 id="song-title">Hey Minnale</h1>
+        <p id="song-artist">G. V. Prakash Kumar, Haricharan, Shweta Mohan</p>
+       
+        <audio id="song">
+            <source src="Hey Minnale.mp3" type="audio/mpeg">
+        </audio>
+       
+        <input type="range" value="0" id="progress">
+       
+        <div class="controls">
+            <div onclick="prevSong()"><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlicon"></i></div>
+            <div onclick="nextSong()"><i class="fa-solid fa-forward"></i></div>
+        </div>
+        
+        <div class="extra-controls">
+            <i class="fa-solid fa-random" onclick="toggleShuffle()"></i>
+            <input type="range" id="volume" min="0" max="1" step="0.1" onchange="changeVolume()">
+            <i class="fa-solid fa-repeat" onclick="toggleRepeat()"></i>
+        </div>
+       
+        <!-- Playlist in Navbar -->
+        <div class="playlist-container hidden" id="playlist-container">
+            <div class="playlist-header">
+                <h2>Playlist</h2>
+                <button class="close-btn" id="close-btn">X</button>
+            </div>
+            <ul class="playlist" id="playlist"></ul>
+        </div>
+        
+      </div>
+    </div>
+
+    <script >let progress = document.getElementById("progress");
+        let song = document.getElementById("song");
+        let ctrlIcon = document.getElementById("ctrlicon");
+        let songTitle = document.getElementById("song-title");
+        let songArtist = document.getElementById("song-artist");
+        let songImg = document.getElementById("song-img");
+        let playlistElem = document.getElementById("playlist");
+        let playlistContainer = document.getElementById("playlist-container");
+        let playlistToggle = document.getElementById("playlist-toggle");
+        
+        let songs = [
+            { title: "Hey Minnale", artist: "G. V. Prakash Kumar", src: "songs/Hey Minnale.mp3", img: "image/size_m.jpg" },
+            { title: "Vazhithunaiye", artist: "Leon James, Sid Sriram, Sanjana Kalmanje ", src: "songs/Vazhithunaiye.mp3", img: "image/dragon-leon-james.webp" },
+            { title: "Karumugil", artist: "Vishal Chandrashekhar, Sai Vignesh ", src: "songs/Kurumugil-MassTamilan.dev.mp3", img: "image/Hey-Sita-Hey-Rama-From-Sita-Ramam-Tamil-Tamil-2022-20220509152203-500x500.jpg" }
+        ];
+        
+        let songIndex = 0;
+        let isShuffle = false;
+        let isRepeat = false;
+        
+        function loadSong(index) {
+            let currentSong = songs[index];
+            song.src = currentSong.src;
+            songTitle.innerText = currentSong.title;
+            songArtist.innerText = currentSong.artist;
+            songImg.src = currentSong.img;
+            song.load();
+        }
+        
+        function playPause() {
+            if (song.paused) {
+                song.play();
+                ctrlIcon.classList.add("fa-pause");
+                ctrlIcon.classList.remove("fa-play");
+            } else {
+                song.pause();
+                ctrlIcon.classList.add("fa-play");
+                ctrlIcon.classList.remove("fa-pause");
+            }
+        }
+        
+        function nextSong() {
+            songIndex = isShuffle ? Math.floor(Math.random() * songs.length) : (songIndex + 1) % songs.length;
+            loadSong(songIndex);
+            playPause();
+        }
+        
+        function prevSong() {
+            songIndex = (songIndex - 1 + songs.length) % songs.length;
+            loadSong(songIndex);
+            playPause();
+        }
+        
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            alert(`Shuffle: ${isShuffle ? 'On' : 'Off'}`);
+        }
+        
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            song.loop = isRepeat;
+            alert(`Repeat: ${isRepeat ? 'On' : 'Off'}`);
+        }
+        
+        function changeVolume() {
+            song.volume = document.getElementById("volume").value;
+        }
+        
+        function togglePlaylist() {
+            // Toggle visibility of the playlist
+            playlistContainer.classList.toggle("hidden");
+        }
+        
+        // Toggle playlist when clicking the menu bar
+        playlistToggle.addEventListener("click", togglePlaylist);
+        
+        song.onended = function () {
+            if (!isRepeat) nextSong();
+        };
+        
+        song.onloadedmetadata = function () {
+            progress.max = song.duration;
+            progress.value = song.currentTime;
+        };
+        
+        setInterval(() => {
+            progress.value = song.currentTime;
+        }, 500);
+        
+        progress.onchange = function () {
+            song.currentTime = progress.value;
+            playPause();
+        };
+        
+        // Add playlist items to navbar
+        songs.forEach((s, index) => {
+            let li = document.createElement("li");
+            li.innerText = s.title;
+            li.onclick = () => {
+                songIndex = index;
+                loadSong(songIndex);
+                playPause();
+            };
+            li.classList.add("playlist-item");
+            playlistElem.appendChild(li);
+        });
+        
+        loadSong(songIndex);
+        
+
+
+        let closeBtn = document.getElementById("close-btn");
+
+        function togglePlaylist() {
+    let playlistContainer = document.getElementById("playlist-container");
+    
+    if (playlistContainer.classList.contains("hidden")) {
+        playlistContainer.classList.remove("hidden");
+        playlistContainer.style.display = "block"; // Ensure it appears
+    } else {
+        playlistContainer.classList.add("hidden");
+        playlistContainer.style.display = "none"; // Hide when clicked again
+    }
+}
+
+
+playlistToggle.addEventListener("click", togglePlaylist);
+closeBtn.addEventListener("click", togglePlaylist);
+        </script>
+</body>
+</html>
