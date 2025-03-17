@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+ <meta name="description" content="This is a page about web development services">
+ <meta name="keywords" content="website, web development, graphic design">
+
+ <title>Our services</title>
+ <style>
+    a{
+        text-decoration: none;
+    }
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI',sans-serif, Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header h1{
+        font-size: 4em;
+        text-transform: uppercase; 
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        color: white;
+    }
+    header{
+        background-image: url('https://thumbs.dreamstime.com/b/blogging-blog-concepts-ideas-worktable-blogging-blog-concepts-ideas-white-worktable-110423482.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 70px 0;
+        background-size: cover;
+        text-align: center;
+    }
+    nav{
+        background-color: #1c2015;
+        padding: 15px 0;
+        display: flex;
+        justify-content:center;
+        box-shadow: 0.2px 5px rgba(0,0,0,0.8);
+        
+    }
+
+    nav a {
+        margin: 0 20px;
+        color: white;
+        font-size: 1.2em;
+        
+    }
+    .container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+    background: #f4f4f4;
+}
+
+.sidebar {
+    width: 30%;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.content {
+    width: 70%;
+}
+
+.blog-post {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+.blog-post h2 {
+    color: #333;
+    font-size: 1.8em;
+}
+
+.blog-post p {
+    color: #666;
+    line-height: 1.5;
+}
+
+footer {
+    background-color: #1c2015;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+ </style>
+
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Services that we are providing</h1> 
+    </header>
+    <!-- Navigation bar Section -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+    </nav>
+    <!-- Side Bar Section -->
+     
+     <div class="container">
+        <div class="sidebar">
+        <h2>Categories</h2>
+        <ul>
+            <li><a href="#">development</a></li>
+            <li><a href="#">Grapic Design</a></li> 
+            <li><a href="#">UI/UX Design</a></li> 
+            <li><a href="#">Mobile Apps</a></li> 
+        </ul>
+        </div>
+
+     <div class="content">
+        <div class="blog-post">
+          <h2>How to build a responsive website</h2>
+          <p>Posted on October 5, 2024 by Admin</p>
+          <p>Building a responsive website is essential in today's mobile-first world. in this article , we'll explore the best practices forcreating websites that adapt seamlessly to all screen sizes.</p>
+        </div>
+
+        <div class="blog-post">
+            <h2>Top 10 Graphic design trends for 2024</h2>
+            <p>Posted on September 28, 2024 by Admin</p>
+            <p>As technology evovles, so do design trends. in 2024, expect bold typography, vibrant colors, and minimalism to dominate the design scence.Didcover the top 10 trends that will shape the design world and how you can incorporate them into your projects.</p>
+        </div>
+
+        <div class="blog-post">
+            <h2>The importance of UI/UX design in apps</h2>
+            <p>Posted on September 15, 2024 by Admin</p>
+            <p>UI/UX design plays a critical role in user satisfaction.in this article,we'll dive into the reasons why user-centered design is key to app success and how you can improve the user experience of your mobile applications.</p>
+        </div>
+     </div>
+    </div>
+     
+     <footer>
+        <p>&copy;2024 My Stylish Blog. All Rights Reserved. Privacy Policy</p>
+     </footer>
+     
+</body>
+</html>
